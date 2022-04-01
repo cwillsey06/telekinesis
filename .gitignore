@@ -1,0 +1,10 @@
+# DS_Store
+/.DS_Store
+
+# Build files
+/*.rbxlx
+/*.rbxmx
+
+# Roblox Studio lock files
+/*.rbxlx.lock
+/*.rbxl.lock

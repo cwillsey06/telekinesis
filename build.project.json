@@ -1,0 +1,6 @@
+{
+    "name": "telekinesis",
+    "tree": {
+        "$path": "src"
+    }
+}

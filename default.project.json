@@ -1,0 +1,14 @@
+{
+    "name": "telekinesis",
+    "tree": {
+        "$className": "DataModel",
+
+        "StarterPlayer": {
+            "StarterPlayerScripts": {
+                "Telekinesis": {
+                    "$path": "src"
+                }
+            }
+        }
+    }
+}
