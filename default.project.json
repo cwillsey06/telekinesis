@@ -1,12 +1,18 @@
 {
-    "name": "telekinesis",
+    "name": "Telekinesis",
     "tree": {
         "$className": "DataModel",
 
+        "ServerScriptService": {
+            "TelekinesisService": {
+                "$path": "src/TelekinesisService"
+            }
+        },
+
         "StarterPlayer": {
             "StarterPlayerScripts": {
-                "Telekinesis": {
-                    "$path": "src"
+                "TelekinesisController": {
+                    "$path": "src/TelekinesisController"
                 }
             }
         }

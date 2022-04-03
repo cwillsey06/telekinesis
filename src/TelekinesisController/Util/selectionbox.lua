@@ -43,6 +43,9 @@ function SelectionBox.new(properties: SelectionBoxProperties?)
     self.SelectionBox = _createSelectionBox(properties)
     self._ct:Add(self.SelectionBox)
 
+    self.IgnoreAnchoredObjects = false
+    self.Filter = {}
+
     return self
 end
 
@@ -69,7 +72,13 @@ function SelectionBox:Start()
     local priority = Enum.RenderPriority.Input.Value
     self.service_id = "runner_".. HttpService:GenerateGUID()
     RunService:BindToRenderStep(self.service_id, priority, function()
-        if Mouse.Target and not Mouse.Target.Locked then
+        local target = Mouse.Target
+        if not target then return end
+
+        if  not target.Locked
+            and not target.Anchored -- TODO: make optional
+            and not self.Filter[target]
+        then
             self:Select(Mouse.Target)
         else
             self:Deselect()
@@ -82,7 +91,7 @@ function SelectionBox:Stop()
         warn("SelectionBox is not running!")
         return
     end
-    
+
     self:Deselect()
     RunService:UnbindFromRenderStep(self.service_id)
     self.service_id = nil
