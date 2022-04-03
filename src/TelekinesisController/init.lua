@@ -11,7 +11,7 @@ local new = require(util.new)
 local TelekinesisService = game:GetService("ReplicatedStorage"):WaitForChild("TelekinesisService")
 
 local Selector = SelectionBox.new({
-    Outline = {Color = Color3.fromRGB(25, 153, 255)},
+    Outline = {Color = Color3.fromRGB(129, 112, 255)},
     Surface = {Transparency = 0.8}
 })
 Selector.IgnoreAnchoredObjects = true
