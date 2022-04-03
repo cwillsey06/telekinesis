@@ -11,6 +11,7 @@ local RunService = game:GetService("RunService")
 
 local util = script.Parent
 local Caretaker = require(util.caretaker)
+local Signal =require(util.signal)
 local new = require(util.new)
 
 local Mouse = game.Players.LocalPlayer:GetMouse()
@@ -34,8 +35,6 @@ end
 local SelectionBox = {}
 SelectionBox.__index = SelectionBox
 
-SelectionBox.Clicked = Mouse.Button1Down
-
 function SelectionBox.new(properties: SelectionBoxProperties?)
     local self = setmetatable({}, SelectionBox)
     self._ct = Caretaker.new()
@@ -45,6 +44,11 @@ function SelectionBox.new(properties: SelectionBoxProperties?)
 
     self.IgnoreAnchoredObjects = false
     self.Filter = {}
+
+    self.Clicked = Signal.new()
+    Mouse.Button1Down:Connect(function()
+        self.Clicked:Fire(Mouse.Hit, Mouse.UnitRay)
+    end)
 
     return self
 end
