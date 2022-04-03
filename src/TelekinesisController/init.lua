@@ -18,34 +18,34 @@ local TelekinesisController = {}
 TelekinesisController.CurrentObjects = {}
 TelekinesisController.CurrentMode = "Grab"
 
-function StartGrabMode()
+function TelekinesisController:StartGrabMode()
     TelekinesisService.SetLightColor:InvokeServer(Color3.fromRGB(125, 213, 235))
-    TelekinesisController.CurrentMode = "Grab"
+    self.CurrentMode = "Grab"
     Selector:Start()
 end
 
-function StartThrowMode()
+function TelekinesisController:StartThrowMode()
     TelekinesisController.CurrentMode = "Throw"
-    TelekinesisService.SetLightColor:InvokeServer(Color3.fromRGB(230, 125, 235))
+    self.SetLightColor:InvokeServer(Color3.fromRGB(230, 125, 235))
     Selector:Stop()
 end
 
 function TelekinesisController.SwapMode()
     if TelekinesisController.CurrentMode == "Grab" then
-        StartThrowMode()
+        TelekinesisController:StartThrowMode()
     else
-        StartGrabMode()
+        TelekinesisController:StartGrabMode()
     end
 end
 
-function TelekinesisController.ManipulateObject(object, ray)
+function TelekinesisController:ManipulateObject(object, ray)
     if TelekinesisController.CurrentMode == "Grab" then
         if not object then return end
         TelekinesisService.GrabObject:InvokeServer(object)
-        table.insert(TelekinesisController.CurrentObjects, object)
+        table.insert(self.CurrentObjects, object)
         table.insert(Selector.Filter, object)
     elseif TelekinesisController.CurrentMode == "Throw" then
-        table.remove(TelekinesisController.CurrentObjects, #TelekinesisController.CurrentObjects)
+        table.remove(self.CurrentObjects, #self.CurrentObjects)
         table.remove(Selector.Filter, #Selector.Filter)
         TelekinesisService.ThrowObject:InvokeServer(ray)
     end
@@ -55,9 +55,9 @@ bind({Enum.KeyCode.Q}, TelekinesisController.SwapMode)
 
 Selector.Clicked:Connect(function(_, ray)
     local target = Selector:GetTarget()
-    TelekinesisController.ManipulateObject(target, ray)
+    TelekinesisController:ManipulateObject(target, ray)
 end)
 
-StartGrabMode()
+TelekinesisController:StartGrabMode()
 
 return {}
