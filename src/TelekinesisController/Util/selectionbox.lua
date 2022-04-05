@@ -37,6 +37,12 @@ SelectionBox.__index = SelectionBox
 
 function SelectionBox.new(properties: SelectionBoxProperties?)
     local self = setmetatable({}, SelectionBox)
+    function self.__newindex(_, k, v)
+        if self.SelectionBox[k] then
+            self.SelectionBox[k] = v
+        end
+    end
+
     self._ct = Caretaker.new()
 
     self.SelectionBox = _createSelectionBox(properties)
@@ -47,14 +53,22 @@ function SelectionBox.new(properties: SelectionBoxProperties?)
 
     self.Clicked = Signal.new()
     Mouse.Button1Down:Connect(function()
-        self.Clicked:Fire(Mouse.Hit, Mouse.UnitRay)
+        self.Clicked:Fire()
     end)
 
     return self
 end
 
+function SelectionBox:GetMouse()
+    return Mouse
+end
+
 function SelectionBox:GetTarget()
     return self.SelectionBox.Adornee
+end
+
+function SelectionBox:SetFilter(t)
+    self.Filter = t
 end
 
 function SelectionBox:Select(target: Instance)
