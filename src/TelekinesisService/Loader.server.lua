@@ -1,5 +1,5 @@
 local service = require(script.Parent)
-local new = require(script.util.new)
+local new = require(script.Parent.Util.new)
 
 local folder = new("Folder", game.ReplicatedStorage, {Name = "TelekinesisService"})
 for k, v in pairs(service.Client) do

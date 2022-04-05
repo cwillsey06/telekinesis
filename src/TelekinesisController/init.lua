@@ -15,7 +15,7 @@ local stateEnum = {
     OnCooldown = 2;
 }
 
-local TelekinesisService = game:GetService("ReplicatedStorage").TelekinesisService
+local TelekinesisService = game:GetService("ReplicatedStorage"):WaitForChild("TelekinesisService")
 
 local TelekinesisController = {}
 TelekinesisController.State = stateEnum.None

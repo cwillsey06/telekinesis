@@ -2,10 +2,6 @@
 -- Coltrane Willsey
 -- 2022-04-02 [17:41]
 
--- init.lua
--- Coltrane Willsey
--- 2022-03-31 [15:18]
-
 local RunService = game:GetService("RunService")
 
 local util = script.Util
@@ -65,7 +61,7 @@ function TelekinesisService.Client.GrabObject(player: Player, object: BasePart)
         ApplyAtCenterOfMass = true,
         Attachment0 = Attachment0,
         ReactionForceEnabled = true,
-        Responsiveness = 150
+        Responsiveness = 80
     })
 
     _class._ct:Add(Attachment0)
