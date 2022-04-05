@@ -61,7 +61,7 @@ function TelekinesisService.Client.GrabObject(player: Player, object: BasePart)
         ApplyAtCenterOfMass = true,
         Attachment0 = Attachment0,
         ReactionForceEnabled = true,
-        Responsiveness = 80
+        Responsiveness = 500
     })
 
     _class._ct:Add(Attachment0)
