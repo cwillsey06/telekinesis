@@ -52,7 +52,7 @@ function SelectionBox.new(properties: SelectionBoxProperties?)
     self.Filter = {}
 
     self.Clicked = Signal.new()
-    Mouse.Button1Down:Connect(function()
+    Mouse.Button1Up:Connect(function()
         self.Clicked:Fire()
     end)
 
