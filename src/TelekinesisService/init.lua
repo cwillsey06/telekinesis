@@ -78,13 +78,14 @@ function TelekinesisService.Client.GrabObject(player: Player, object: BasePart)
 
     object.CanCollide = false
     object:SetNetworkOwner()
-
+    
     _class._ct:Add(RunService.Heartbeat:Connect(function()
         local angle = i * (circle / #TelekinesisService.CurrentObjects)
         local x, z = getXAndZPositions(angle)
-
+        
         local position = (Root.CFrame * CFrame.new(x, 0, z)).Position
         AlignPosition.Position = position
+        object.AssemblyAngularVelocity = Vector3.new(0.0, 0.5, 0.5)
     end))
 
     return _class
